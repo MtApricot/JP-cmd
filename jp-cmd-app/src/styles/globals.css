@@ -28,7 +28,8 @@ body {
 .keybind-panel {
   display:grid;
   gap: 16px;
-  width: clamp(120px, 30vw, 320px);
+  width: 100%;
+  max-width: 900px;
 }
 .keybind-list {
   display: flex;
@@ -50,9 +51,15 @@ body {
 .keybind-value{
   font-family: ui-monospace,SFMono-Regular,Melno,Monaco,Consoles,"Liberation Mono", "Courier New", monospace;
 }
+.keybind-body{
+  display:grid;
+  gap: 16px;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: start;
+}
 .keybind-status{
   display: grid;
-  gap: 6px;
+  gap: 8px;
 }
 .keybind-error{
   color: #c62828;
@@ -74,4 +81,107 @@ body {
 
 .keybind-item:active {
   background: #e8e8e8;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.settings-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+}
+
+.panel-float {
+  position: absolute;
+  top: 56px;
+  right: 16px;
+  z-index: 10;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.col {
+  border: 1px solid #eee;
+  min-height: 300px;
+  padding: 8px;
+}
+
+.canvas {
+  height: 300px;
+  border: 1px dashed #aaa;
+  display: grid;
+  place-items: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  z-index: 50;
+}
+
+.modal {
+  position: relative;
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  min-width: 520px;
+  max-width: 900px;
+  width: clamp(520px, 70vw, 780px);
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-height: 100vh;
+  overflow: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}
+.input-log {
+  display: grid;
+  gap: 6px;
+  flex-direction: column-reverse;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 40px 24px 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-frame {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: #444;
+}
+
+.input-dir {
+  text-align: center;
+  font-weight: 700;
+}
+
+.btn-icon {
+  margin-right: 6px;
 }

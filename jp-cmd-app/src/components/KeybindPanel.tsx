@@ -77,37 +77,39 @@ export default function KeybindPanel() {
     return (
         <section className="keybind-panel">
             <h2>キー設定</h2>
-            <div className="keybind-list">
-                {Object.entries(keybinds).map(([action, key]) => (
+            <div className="keybind-body">
+                <div className="keybind-list">
+                    {Object.entries(keybinds).map(([action, key]) => (
+                        <button
+                            key={action}
+                            type="button"
+                            className="keybind-item"
+                            onClick={() => handleSelect(action as KeyAction)}>
+                            <span className="keybind-label">
+                                {actionLabels[action as KeyAction]}
+                            </span>
+                            <span className="keybind-value">{formatKey(key)}</span>
+
+                        </button>
+                    ))}
+                </div>
+                <div className="keybind-status">
+                    <p>選択中:  {editingAction ? actionLabels[editingAction] : "なし"}</p>
+                    <p>候補キー: {tempKey ? formatKey(tempKey) : "未入力"}</p>
+
+                    {conflictAction && (<p className="keybind-error">このキーは{actionLabels[conflictAction]}に使われています。別のキーを選んでください。</p>)}
+
+                    <div className="keybind-actions">
                     <button
-                        key={action}
                         type="button"
-                        className="keybind-item"
-                        onClick={() => handleSelect(action as KeyAction)}>
-                        <span className="keybind-label">
-                            {actionLabels[action as KeyAction]}
-                        </span>
-                        <span className="keybind-value">{formatKey(key)}</span>
-
+                        onClick={handleSave}
+                        disabled={!editingAction || !!conflictAction}>
+                        保存
                     </button>
-                ))}
-            </div>
-            <div className="keybind-status">
-                <p>選択中:  {editingAction ? actionLabels[editingAction] : "なし"}</p>
-                <p>候補キー: {tempKey ? formatKey(tempKey) : "未入力"}</p>
-
-                {conflictAction && (<p className="keybind-error">このキーは{actionLabels[conflictAction]}に使われています。別のキーを選んでください。</p>)}
-
-                <div className="keybind-actions">
-                <button
-                    type="button"
-                    onClick={handleSave}
-                    disabled={!editingAction || !!conflictAction}>
-                    保存
-                </button>
-                <button
-                    type="button"
-                    onClick={resetKeybinds}>リセット</button>
+                    <button
+                        type="button"
+                        onClick={resetKeybinds}>リセット</button>
+                    </div>
                 </div>
             </div>
         </section>
