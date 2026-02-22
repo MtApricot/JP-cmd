@@ -10,6 +10,8 @@ export type Keybinds = {
     hp: string;
     hk: string;
     throw?: string;
+    impact: string; // ドライブインパクト
+    parry: string;  // ドライブパリィ
 };
 export type Settings = {
     volume: number;
@@ -17,5 +19,5 @@ export type Settings = {
 };
 export type Stats = {
     maxStreak: number;
-    bestFrame: number;
+    bestFrames: number;
 };
