@@ -1,3 +1,4 @@
+"use client";
 import { useInputStore } from "../store/inputStore";
 
 export default function InputHistory() {
