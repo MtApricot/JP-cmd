@@ -5,31 +5,51 @@ type Button = "P" | "K";
 type InputFrame = {
     frame: number;
     dir: Direction;
-    buttons: Button[];
+    buttons: Button[]; // 同時押しを配列で保持
 };
 
 type InputState = {
     currentDir: Direction;
-    currentButtons: Button[];
+    currentButtons: Button[]; // 現在同時に押されているボタン
     history: InputFrame[];
+    frameCounter: number; // 自動採番用のカウンタ
     
     setCurrentInput: (dir: Direction, buttons: Button[]) => void;
-    pushHistory:(entry: InputFrame) => void;
+    pushHistory: (dir: Direction, buttons: Button[]) => void;
     clearHistory: () => void;
+    resetFrameCounter: () => void;
 };
 
-const Max_History = 120; // 入力の最後の120フレームを保存す
+const MAX_HISTORY = 120; // 入力の最後の120フレームを保存す
 
-export const useInputStore = create<InputState>((set) => ({
+export const useInputStore = create<InputState>((set, get) => ({
     currentDir: "neutral",
     currentButtons: [],
     history: [],
+    frameCounter: 0,
 
     setCurrentInput: (dir, buttons) => set({ currentDir: dir, currentButtons: buttons }),
-    pushHistory: (entry) => set((state) => {
-        const next = [...state.history, entry];
-        const trimmed = next.length > Max_History ? next.slice(- Max_History) : next;
-        return { history: trimmed };
-    }),
+    pushHistory: (dir, buttons) => {
+    const nextFrame = get().frameCounter + 1;
+    const entry: InputFrame = {
+      frame: nextFrame,
+      dir,
+      buttons,
+    };
+
+    set((state) => {
+      const nextHistory = [...state.history, entry];
+      const trimmed =
+        nextHistory.length > MAX_HISTORY
+          ? nextHistory.slice(-MAX_HISTORY)
+          : nextHistory;
+
+      return {
+        history: trimmed,
+        frameCounter: nextFrame,
+      };
+    });
+  },
     clearHistory: () => set({ history: [] }),
+    resetFrameCounter: () => set({ frameCounter: 0 }),
 }));
