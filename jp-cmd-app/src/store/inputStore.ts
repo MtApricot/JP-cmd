@@ -1,7 +1,6 @@
 import { create } from 'zustand';
-type Direction = | "neutral" | "up" | "down" | "left" | "right" | "up-left" | "up-right" | "down-left" | "down-right";
-type Button = "P" | "K";
-
+type Direction = "neutral" | "up" | "down" | "left" | "right" | "up-left" | "up-right" | "down-left" | "down-right";
+export type Button = "LP" | "LK" | "MP" | "MK" | "HP" | "HK" | "THROW" | "IMPACT" | "PARRY";
 type InputFrame = {
     frame: number;
     dir: Direction;
