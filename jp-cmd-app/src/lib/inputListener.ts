@@ -21,6 +21,7 @@ type KeybindsLike = {
 
 const pressed = new Set<string>();
 
+const normalizeKey = (key: string) => key.toLowerCase();
 const buttonMap: Record<ButtonKey, Button> = {
     lp: "LP",
     lk: "LK",
@@ -34,10 +35,10 @@ const buttonMap: Record<ButtonKey, Button> = {
 };
 
 const getDirection = (keys: Set<string>, keybinds: KeybindsLike) => {
-    const up = keys.has(keybinds.up);
-    const down = keys.has(keybinds.down);
-    const left = keys.has(keybinds.left);
-    const right = keys.has(keybinds.right);
+    const up = keys.has(normalizeKey(keybinds.up));
+    const down = keys.has(normalizeKey(keybinds.down));
+    const left = keys.has(normalizeKey(keybinds.left));
+    const right = keys.has(normalizeKey(keybinds.right));
 
     if (up && left) return "up-left";
     if (up && right) return "up-right";
@@ -52,28 +53,28 @@ const getDirection = (keys: Set<string>, keybinds: KeybindsLike) => {
 
 const getButtons = (keys: Set<string>, keybinds: KeybindsLike) => {
     const list: Button[] = [];
-    if (keys.has(keybinds.lp)) list.push(buttonMap.lp);
-    if (keys.has(keybinds.lk)) list.push(buttonMap.lk);
-    if (keys.has(keybinds.mp)) list.push(buttonMap.mp);
-    if (keys.has(keybinds.mk)) list.push(buttonMap.mk);
-    if (keys.has(keybinds.hp)) list.push(buttonMap.hp);
-    if (keys.has(keybinds.hk)) list.push(buttonMap.hk);
-    if (keybinds.throw && keys.has(keybinds.throw)) list.push(buttonMap.throw);
-    if (keys.has(keybinds.impact)) list.push(buttonMap.impact);
-    if (keys.has(keybinds.parry)) list.push(buttonMap.parry);
+    if (keys.has(normalizeKey(keybinds.lp))) list.push(buttonMap.lp);
+    if (keys.has(normalizeKey(keybinds.lk))) list.push(buttonMap.lk);
+    if (keys.has(normalizeKey(keybinds.mp))) list.push(buttonMap.mp);
+    if (keys.has(normalizeKey(keybinds.mk))) list.push(buttonMap.mk);
+    if (keys.has(normalizeKey(keybinds.hp))) list.push(buttonMap.hp);
+    if (keys.has(normalizeKey(keybinds.hk))) list.push(buttonMap.hk);
+    if (keybinds.throw && keys.has(normalizeKey(keybinds.throw))) list.push(buttonMap.throw);
+    if (keys.has(normalizeKey(keybinds.impact))) list.push(buttonMap.impact);
+    if (keys.has(normalizeKey(keybinds.parry))) list.push(buttonMap.parry);
     return list;
 };
 
 export const attachInputListener = (keybinds: KeybindsLike) => {
     const onKeyDown = (e: KeyboardEvent) => {
-        pressed.add(e.key);
+        pressed.add(normalizeKey(e.key));
         const dir = getDirection(pressed, keybinds);
         const buttons = getButtons(pressed, keybinds);
         useInputStore.getState().setCurrentInput(dir, buttons);
     };
 
     const onKeyUp = (e: KeyboardEvent) => {
-        pressed.delete(e.key);
+        pressed.delete(normalizeKey(e.key));
         const dir = getDirection(pressed, keybinds);
         const buttons = getButtons(pressed, keybinds);
         useInputStore.getState().setCurrentInput(dir, buttons);
