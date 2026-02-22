@@ -24,3 +24,54 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.keybind-panel {
+  display:grid;
+  gap: 16px;
+  width: clamp(120px, 30vw, 320px);
+}
+.keybind-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.keybind-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid #d6d6d6;
+  background: #f8f8f8;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.keybind-label {
+  font-weight: 600;
+}
+.keybind-value{
+  font-family: ui-monospace,SFMono-Regular,Melno,Monaco,Consoles,"Liberation Mono", "Courier New", monospace;
+}
+.keybind-status{
+  display: grid;
+  gap: 6px;
+}
+.keybind-error{
+  color: #c62828;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+}
+.keybind-actions{
+  display: flex;
+  gap: 8px;
+} 
+.keybind-actions button:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.keybind-item:hover {
+  background: #f0f0f0;
+}
+
+.keybind-item:active {
+  background: #e8e8e8;
+}
