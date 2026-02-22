@@ -3,17 +3,17 @@ import type { Keybinds } from '../lib/storageTypes';
 import { loadKeybinds, saveKeybinds } from '../lib/storage';
 
 const defaultKeybinds: Keybinds = {
-    up: 'w',
-    down: 's',
-    left: 'a',
-    right: 'd',
-    lp: 'y',
-    lk: 'h',
-    mp: 'u',
-    mk: 'j',
-    hp: 'i',
-    hk: 'k',
-    throw: 'g',
+    up: 'W',
+    down: 'S',
+    left: 'A',
+    right: 'D',
+    lp: 'Y',
+    lk: 'H',
+    mp: 'U',
+    mk: 'J',
+    hp: 'I',
+    hk: 'K',
+    throw: 'G',
     impact: 'Space', 
     parry: "LeftShift",
 };
