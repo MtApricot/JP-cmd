@@ -83,6 +83,38 @@ body {
   background: #e8e8e8;
 }
 
+.move-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.move-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  background: #fff;
+  text-align: left;
+}
+
+.move-card.active {
+  border-color: #7aa7ff;
+  background: #f3f7ff;
+}
+
+.move-name {
+  font-weight: 600;
+}
+
+.move-inputs {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
 .app-shell {
   position: relative;
   min-height: 100vh;
@@ -190,4 +222,76 @@ body {
   top: 16px;
   right: 80px;
   z-index: 10;
+}
+.combo-recipe {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #444;
+}
+
+.combo-step {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 8px;
+}
+
+.combo-label {
+  font-weight: 600;
+}
+
+.combo-key {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.combo-tips {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #666;
+}
+
+.combo-status {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #2b7;
+}
+
+.drill-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.move-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drill-list button {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  background: #f6f6f6;
+}
+
+.drill-list button.active {
+  background: #e6f0ff;
+  border-color: #7aa7ff;
+}
+
+.move-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.move-card.active {
+  border-color: #7aa7ff;
+  background: #f3f7ff;
 }
