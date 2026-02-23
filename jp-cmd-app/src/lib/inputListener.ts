@@ -21,7 +21,7 @@ type KeybindsLike = {
 
 const pressed = new Set<string>();
 
-const normalizeKey = (key: string) => key.toLowerCase();
+const normalizeKey = (key: string) => (key === " " ? "space" : key.toLowerCase());
 const buttonMap: Record<ButtonKey, Button> = {
     lp: "LP",
     lk: "LK",
@@ -67,6 +67,9 @@ const getButtons = (keys: Set<string>, keybinds: KeybindsLike) => {
 
 export const attachInputListener = (keybinds: KeybindsLike) => {
     const onKeyDown = (e: KeyboardEvent) => {
+        if (Object.values(keybinds).some((k) => normalizeKey(k) === normalizeKey(e.key))) {
+            e.preventDefault();
+        }
         pressed.add(normalizeKey(e.key));
         const dir = getDirection(pressed, keybinds);
         const buttons = getButtons(pressed, keybinds);
@@ -74,6 +77,9 @@ export const attachInputListener = (keybinds: KeybindsLike) => {
     };
 
     const onKeyUp = (e: KeyboardEvent) => {
+         if (Object.values(keybinds).some((k) => normalizeKey(k) === normalizeKey(e.key))) {
+            e.preventDefault();
+        }
         pressed.delete(normalizeKey(e.key));
         const dir = getDirection(pressed, keybinds);
         const buttons = getButtons(pressed, keybinds);
