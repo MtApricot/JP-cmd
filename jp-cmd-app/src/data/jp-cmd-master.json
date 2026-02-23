@@ -1,0 +1,91 @@
+{
+  "character": "JP",
+  "control_scheme": "Classic",
+  "moves": {
+    "normal_moves": [
+      { "name": "立ち弱P", "input": ["LightPunch"], "startup": 4, "on_block": -2 },
+      { "name": "立ち中P", "input": ["MediumPunch"], "startup": 7, "on_block": -2 },
+      { "name": "立ち強P", "input": ["HeavyPunch"], "startup": 11, "on_block": -3 },
+      { "name": "立ち弱K", "input": ["LightKick"], "startup": 5, "on_block": -3 },
+      { "name": "立ち中K", "input": ["MediumKick"], "startup": 9, "on_block": -4 },
+      { "name": "立ち強K", "input": ["HeavyKick"], "startup": 12, "on_block": -3 },
+      { "name": "しゃがみ弱P", "input": ["Down+LightPunch"], "startup": 4, "on_block": -2 },
+      { "name": "しゃがみ中P", "input": ["Down+MediumPunch"], "startup": 8, "on_block": -3 },
+      { "name": "しゃがみ強P", "input": ["Down+HeavyPunch"], "startup": 10, "on_block": -12 },
+      { "name": "しゃがみ弱K", "input": ["Down+LightKick"], "startup": 5, "on_block": -2 },
+      { "name": "しゃがみ中K", "input": ["Down+MediumKick"], "startup": 10, "on_block": -5 },
+      { "name": "しゃがみ強K", "input": ["Down+HeavyKick"], "startup": 10, "on_block": -11 }
+    ],
+    "unique_attacks": [
+      { "name": "グリスニィ", "input": ["Right+MediumPunch"], "startup": 15, "on_block": -3 },
+      { "name": "グリスニィ(2段目)", "input": ["Right+MediumPunch", "MediumPunch"], "startup": 14, "on_block": -8 },
+      { "name": "マルニィ", "input": ["Right+HeavyPunch"], "startup": 17, "on_block": -6 },
+      { "name": "ルカ", "input": ["Right+HeavyKick"], "startup": 25, "on_block": 1 },
+      { "name": "ズィルニィトラ", "input": ["Left+HeavyPunch"], "startup": 12, "on_block": -6 }
+    ],
+    "special_moves": [
+      {
+        "name": "トリグラフ",
+        "input": ["Down", "Down", "Punch"],
+        "startup": 28,
+        "on_block": -13,
+        "note": "弱/中/強で距離変化"
+      },
+      {
+        "name": "ストリボーグ",
+        "input": ["Down", "Down+Right", "Right", "Punch"],
+        "startup": 14,
+        "on_block": -11
+      },
+      {
+        "name": "ヴィーハト",
+        "input": ["Down", "Down+Left", "Left", "Kick"],
+        "startup": 16,
+        "on_block": -3,
+        "note": "設置動作のフレーム"
+      },
+      {
+        "name": "ヴィーハト・アクノ",
+        "input": ["Down", "Down+Left", "Left", "LightPunch_or_MediumPunch"],
+        "startup": 19,
+        "on_block": -3,
+        "note": "設置からの派生起爆"
+      },
+      {
+        "name": "ヴィーハト・チェーニ",
+        "input": ["Down", "Down+Left", "Left", "HeavyPunch"],
+        "note": "ワープ移動"
+      },
+      {
+        "name": "トルバラン",
+        "input": ["Down", "Down+Right", "Right", "Kick"],
+        "startup": 19,
+        "on_block": -5,
+        "note": "ホールドでフェイント可能"
+      },
+      {
+        "name": "アブニマーチ",
+        "input": ["Down", "Down+Left", "Left", "Punch"],
+        "startup": 28,
+        "note": "ガード不能のコマンド投げ"
+      },
+      {
+        "name": "アムネジア",
+        "input": ["Down", "Down", "Kick"],
+        "startup": 1,
+        "note": "当て身。OD版は発生1Fから空中攻撃も取れる"
+      }
+    ],
+    "super_arts": [
+      { "name": "チェルノボーグ (SA1)", "input": ["Down", "Down+Right", "Right", "Down", "Down+Right", "Right", "Punch"], "startup": 10, "on_block": -17 },
+      { "name": "ラヴーシュカ (SA2)", "input": ["Down", "Down+Left", "Left", "Down", "Down+Left", "Left", "Punch"], "startup": 7, "note": "多段ヒットの分身攻撃" },
+      { "name": "ザットニィ (SA3)", "input": ["Down", "Down+Right", "Right", "Down", "Down+Right", "Right", "Kick"], "startup": 12, "on_block": -31 }
+    ],
+    "common_actions": [
+      { "name": "ドライブインパクト", "input": ["HeavyPunch+HeavyKick"], "startup": 26, "on_block": 1 },
+      { "name": "ドライブパリィ", "input": ["MediumPunch+MediumKick"], "startup": 1, "note": "ホールド可能" },
+      { "name": "前方ダッシュ", "input": ["Right", "Right"], "duration": 19 },
+      { "name": "バックステップ", "input": ["Left", "Left"], "duration": 23 }
+    ]
+  }
+}
