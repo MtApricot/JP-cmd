@@ -1,0 +1,38 @@
+{
+  "category": "JP_Practical_Combos",
+  "combos": [
+    {
+      "id": "small_start_1",
+      "title": "小技始動 基本パーツ",
+      "recipe": [
+        { "key": "S+J", "label": "コパ(2LP)" },
+        { "key": "S+J", "label": "コパ(2LP)" },
+        { "key": "U", "label": "立ち弱P(5LP)" },
+        { "flow": ["S", "SA", "A", "U"], "label": "弱ストリボーグ" }
+      ],
+      "tips": "コパから立ち弱Pへの繋ぎはリズム良く。ストリボーグはSからAへ滑らせる。"
+    },
+    {
+      "id": "medium_start_1",
+      "title": "中技始動 詐欺飛び/設置ルート",
+      "recipe": [
+        { "key": "S+K", "label": "中足(2MK) or 2中P" },
+        { "flow": ["S", "SD", "D", "K"], "label": "中ストリボーグ" }
+      ],
+      "status_after": "+42f",
+      "tips": "ヒット後+42f。ここから詐欺飛びや設置の練習に移行。"
+    },
+    {
+      "id": "rush_loop_1",
+      "title": "画面中央 ラッシュコンボ",
+      "recipe": [
+        { "label": "中技以上からキャンセルラッシュ" },
+        { "key": "S+I", "label": "2大P(2HP)" },
+        { "flow": ["S", "SD", "D", "I"], "label": "強ストリボーグ" },
+        { "flow": ["S", "SD", "D", "L"], "label": "中弾" },
+        { "flow": ["S", "S", "I"], "label": "強トリグラフ" }
+      ],
+      "tips": "2大P後の強ストリボーグはキーボードだと指が忙しいので、SとDの同時押しを意識。"
+    }
+  ]
+}

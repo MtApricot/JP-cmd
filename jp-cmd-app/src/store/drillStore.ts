@@ -1,14 +1,19 @@
 import { create } from 'zustand';
-
-type DrillType = "single" | "parts" | "combo" | "setup";
+import type { DrillID } from '../lib/drills';
 
 type DrillState = {
-    drillType: DrillType;
+    drillType: DrillID;
     targetCount: number;
     successCount: number;
     failCount: number;
+    selectedMoveIndex: number;
+    stepIndex: number;
 
-    setDrillType: (type: DrillType) => void;
+    setSelectedMoveIndex: (index: number) => void;
+    nextStep: () => void;
+    resetSteps: () => void;
+
+    setDrillType: (type: DrillID) => void;
     setTargetCount: (count: number) => void;
     incrementSuccess: () => void;
     incrementFail: () => void;
@@ -16,10 +21,16 @@ type DrillState = {
 };
 
 export const useDrillStore = create<DrillState>((set) => ({
-    drillType: "single",
+    drillType: "normal",
     targetCount: 10,
     successCount: 0,
     failCount: 0,
+    selectedMoveIndex: 0,
+    stepIndex: 0,
+
+    setSelectedMoveIndex: (index) => set({ selectedMoveIndex: index, stepIndex: 0 }),
+    nextStep: () => set((state) => ({ stepIndex: state.stepIndex + 1 })),
+    resetSteps: () => set({ stepIndex: 0 }),
 
     setDrillType: (type) => set({ drillType: type }),
     setTargetCount: (count) => set({ targetCount: count }),

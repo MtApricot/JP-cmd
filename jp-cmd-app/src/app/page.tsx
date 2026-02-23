@@ -7,6 +7,7 @@ import { useUIStore } from "../store/uiStore";
 import { stateFrameLoop } from "../lib/frameLoop";
 import { attachInputListener } from "../lib/inputListener";
 import { useKeybindsStore } from "../store/keybindsStore";
+import DrillSelector from "../components/DrillSelector";
 
 export default function Home() {
   const { activePanel, openPanel, closePanel } = useUIStore();
@@ -36,6 +37,19 @@ export default function Home() {
               ×
             </button>
             <KeybindPanel />
+          </div>
+        </div>
+      )}
+      <button className="drill-button" type="button" onClick={() => openPanel("drill")}>
+        command
+      </button>
+      {activePanel === "drill" && (
+        <div className="modal-overlay" onClick={() => closePanel()}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" type="button" onClick={() => closePanel()}>
+              ×
+            </button>
+            <DrillSelector />
           </div>
         </div>
       )}

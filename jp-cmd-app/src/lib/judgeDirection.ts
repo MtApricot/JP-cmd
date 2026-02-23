@@ -1,13 +1,4 @@
-export type Direction =
-    | "neutral"
-    | "up"
-    | "down"
-    | "left"
-    | "right"
-    | "up-left"
-    | "up-right"
-    | "down-left"
-    | "down-right";
+import type { Direction } from "../store/inputStore";
 
 type FrameDir = {
     frame: number;
