@@ -41,6 +41,13 @@ export const stateFrameLoop = () => {
                         resetSteps();
                         setFeedback(true, null, "成功");
                     }
+                } else {
+                    const hasInput =
+                        currentDir !== "neutral" || currentButtons.length > 0;
+                    if (hasInput && stepIndex > 0) {
+                        resetSteps();
+                        setFeedback(false, null, "入力ミス");
+                    }
                 }
             }
         }

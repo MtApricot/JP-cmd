@@ -1,75 +1,101 @@
-import raw from "../data/jp-cmd-master.json"
-import combosRaw from "../data/jp-combos-master.json";
-
-
-export type MoveCategory = "normal_moves" | "unique_attacks" | "special_moves" | "super_arts" | "common_actions" | "combos";
+import raw from "../data/jp-cmd-master.json";
 
 export type Move = {
-    name: string;
-    input: string[];
-    startup?: number;
-    on_block?: number;
-    note?: string;
-    duration?: number;
-
-    recipe?: ComboStep[];
-    tips?: string;
-    status_after?: string;
+  id: string;
+  name: string;
+  input: string[];
+  desc?: string;
 };
+
+export type Combo = {
+  id: string;
+  title: string;
+  sequence: string[];
+  diff?: string;
+};
+
+export type DrillID =
+  | "normal_moves"
+  | "unique_attacks"
+  | "special_moves"
+  | "super_arts"
+  | "common_actions"
+  | "combos";
 
 export type Drill = {
-    id: DrillID;
-    label: string;
-    moves: Move[];
-    category: MoveCategory;
+  id: DrillID;
+  label: string;
+  moves: Move[];
+  combos?: Combo[];
 };
 
-export type DrillID = "normal" | "unique" | "special" | "super" | "common"| "combo"; ;
+type LegacyMove = { id: string; name: string; sequence: string[]; desc?: string };
+type LegacyCombo = { id: string; title: string; sequence: string[]; diff?: string };
+
+type MoveRow = { name: string; input: string[]; note?: string };
+type MasterMovesV2 = {
+  normal_moves?: MoveRow[];
+  unique_attacks?: MoveRow[];
+  special_moves?: MoveRow[];
+  super_arts?: MoveRow[];
+  common_actions?: MoveRow[];
+};
 
 type MasterData = {
-    character: string;
-    control_scheme: string;
-    moves: Record<MoveCategory, Move[]>;
+  character: string;
+  moves: LegacyMove[] | MasterMovesV2;
+  combos?: LegacyCombo[];
 };
 
-const master: MasterData = raw as MasterData;
+const master = raw as MasterData;
+const combos = master.combos ?? [];
 
-type ComboStep = {
-    key?: string;
-    flow?: string[];
-    label?: string;
+const toMove = (m: MoveRow | LegacyMove, id: string): Move => {
+  if ("sequence" in m) {
+    return { id: m.id, name: m.name, input: m.sequence, desc: m.desc };
+  }
+  return { id, name: m.name, input: m.input, desc: m.note };
 };
 
-type Combo = {
-    id: string;
-    title: string;
-    recipe: ComboStep[];
-    tips?: string;
-    status_after?: string;
-};
+const v2Moves = Array.isArray(master.moves)
+  ? null
+  : (master.moves as MasterMovesV2);
 
-type ComboData = {
-  category: string;
-  combos: Combo[];
-};
+const buildMoves = (rows: MoveRow[] | undefined, prefix: string) =>
+  (rows ?? []).map((m, i) => toMove(m, `${prefix}_${i}`));
 
-const combos = combosRaw as ComboData;
+const legacyMoves = Array.isArray(master.moves) ? master.moves : [];
+
 export const DRILLS: Drill[] = [
-    { id: "normal", label: "通常技", category: "normal_moves", moves: master.moves.normal_moves },
-    { id: "unique", label: "特殊技", category: "unique_attacks", moves: master.moves.unique_attacks },
-    { id: "special", label: "必殺技", category: "special_moves", moves: master.moves.special_moves },
-    { id: "super", label: "SA", category: "super_arts", moves: master.moves.super_arts },
-    { id: "common", label: "共通アクション", category: "common_actions", moves: master.moves.common_actions },
-    {
-        id: "combo",
-        label: "コンボ",
-        category: "combos",
-        moves: combos.combos.map((c) => ({
-            name: c.title,
-            input: [], // ここは表示用に使わない（後述でrecipe表示）
-            recipe: c.recipe,
-            tips: c.tips,
-            status_after: c.status_after,
-        })),
-    },
+  {
+    id: "normal_moves",
+    label: "通常技",
+    moves: v2Moves ? buildMoves(v2Moves.normal_moves, "normal") : [],
+  },
+  {
+    id: "unique_attacks",
+    label: "特殊技",
+    moves: v2Moves ? buildMoves(v2Moves.unique_attacks, "unique") : [],
+  },
+  {
+    id: "special_moves",
+    label: "必殺技",
+    moves: v2Moves ? buildMoves(v2Moves.special_moves, "special") : legacyMoves.map((m) => toMove(m, m.id)),
+  },
+  {
+    id: "super_arts",
+    label: "SA",
+    moves: v2Moves ? buildMoves(v2Moves.super_arts, "sa") : [],
+  },
+  {
+    id: "common_actions",
+    label: "共通アクション",
+    moves: v2Moves ? buildMoves(v2Moves.common_actions, "common") : [],
+  },
+  {
+    id: "combos",
+    label: "コンボ",
+    moves: [],
+    combos,
+  },
 ];

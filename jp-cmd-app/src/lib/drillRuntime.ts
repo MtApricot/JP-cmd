@@ -11,6 +11,14 @@ export type Step = {
 };
 
 const dirMap: Record<string, Direction> = {
+  W: "up",
+  S: "down",
+  A: "left",
+  D: "right",
+  "W+A": "up-left",
+  "W+D": "up-right",
+  "S+A": "down-left",
+  "S+D": "down-right",
   Up: "up",
   Down: "down",
   Left: "left",
@@ -22,6 +30,12 @@ const dirMap: Record<string, Direction> = {
 };
 
 const buttonMap: Record<string, ButtonSpec> = {
+  LP: { type: "all", buttons: ["LP"] },
+  MP: { type: "all", buttons: ["MP"] },
+  HP: { type: "all", buttons: ["HP"] },
+  LK: { type: "all", buttons: ["LK"] },
+  MK: { type: "all", buttons: ["MK"] },
+  HK: { type: "all", buttons: ["HK"] },
   LightPunch: { type: "all", buttons: ["LP"] },
   MediumPunch: { type: "all", buttons: ["MP"] },
   HeavyPunch: { type: "all", buttons: ["HP"] },
