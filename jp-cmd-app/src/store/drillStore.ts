@@ -21,7 +21,7 @@ type DrillState = {
 };
 
 export const useDrillStore = create<DrillState>((set) => ({
-    drillType: "normal",
+    drillType: "normal_moves",
     targetCount: 10,
     successCount: 0,
     failCount: 0,
@@ -32,7 +32,7 @@ export const useDrillStore = create<DrillState>((set) => ({
     nextStep: () => set((state) => ({ stepIndex: state.stepIndex + 1 })),
     resetSteps: () => set({ stepIndex: 0 }),
 
-    setDrillType: (type) => set({ drillType: type }),
+    setDrillType: (type) => set({ drillType: type, selectedMoveIndex: 0, stepIndex: 0 }),
     setTargetCount: (count) => set({ targetCount: count }),
     incrementSuccess: () => set((state) => ({ successCount: state.successCount + 1 })),
     incrementFail: () => set((state) => ({ failCount: state.failCount + 1 })),
